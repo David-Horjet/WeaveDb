@@ -1,7 +1,10 @@
-import { Inter } from "next/font/google";
+import Hero from "@/components/home/Hero";
+import Trending from "@/components/home/Trending";
+import Navbar from "@/components/navbar/Navbar";
+import { Poppins } from "next/font/google";
 import WeaveDB from "weavedb-sdk";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 
 export default function Home() {
   const start = async () => {
@@ -11,16 +14,19 @@ export default function Home() {
     await db.init();
 
     const personData = { name: "Bob", age: 20 };
-    const tx = await db.add(personData, users);
+    const tx = await db.add(personData, "users");
 
     console.log(tx);
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <button 
-      onClick={start}
-      >Start</button>
+    <main>
+      <section className="bg-bc2">
+        <Navbar />
+        <Hero />
+        <Trending/>
+        {/* <button onClick={start}>Start</button> */}
+      </section>
     </main>
   );
 }
